@@ -1,13 +1,23 @@
-import { Link } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 import './Menu.css';
 
 function Menu() {
   return (
     <>
       <nav className="menu">
-        <Link to=".">Головна</Link>
-        <Link to="books">Бібліотека книг</Link>
-        <Link to="todolist">Список справ</Link>
+        <NavLink to=".">Головна</NavLink>
+        <NavLink
+          className={({ isActive }) => (isActive ? 'myactive' : '')}
+          to="books"
+        >
+          Бібліотека книг
+        </NavLink>
+        <NavLink
+          className={({ isActive }) => (isActive ? 'myactive-green' : '')}
+          to="todolist"
+        >
+          Список справ
+        </NavLink>
       </nav>
     </>
   );

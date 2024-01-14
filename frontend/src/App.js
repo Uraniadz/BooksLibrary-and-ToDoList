@@ -8,15 +8,13 @@ import Home from './components/Home/Home';
 function App() {
   return (
     <BrowserRouter>
-      <div className="App">
-        <Routes>
-          <Route path="/" element={<MainLayout />}>
-            <Route index element={<Home />} />
-            <Route path="books" element={<BooksLabrary />} />
-            <Route path="todolist" element={<ToDoList />} />
-          </Route>
-        </Routes>
-      </div>
+      <Routes>
+        <Route path="/" element={<MainLayout />}>
+          <Route index element={<Home />} />
+          <Route path="books" element={<BooksLabrary />} />
+          <Route path="todolist" element={<ToDoList />} />
+        </Route>
+      </Routes>
       ;
     </BrowserRouter>
   );
