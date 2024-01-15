@@ -4,6 +4,7 @@ import MainLayout from './layouts/MainLayout';
 import BooksLabrary from './components/BooksLabrary/BooksLabrary';
 import ToDoList from './components/ToDoList/ToDoList';
 import Home from './components/Home/Home';
+import NotFound from './components/NotFound/NotFound';
 
 function App() {
   return (
@@ -14,6 +15,7 @@ function App() {
           <Route path="books" element={<BooksLabrary />} />
           <Route path="todolist" element={<ToDoList />} />
         </Route>
+        <Route path="*" element={<NotFound />} />
       </Routes>
       ;
     </BrowserRouter>

@@ -1,0 +1,13 @@
+.notfound {
+  max-width: 1240px;
+  margin: 50px auto;
+  color: #ffffff;
+  text-align: center;
+}
+.notfound-link {
+  color: rgb(123, 179, 219);
+}
+.notfound-link:hover {
+  text-decoration: underline;
+  color: aquamarine;
+}
