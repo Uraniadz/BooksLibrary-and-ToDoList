@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { setAddBook } from '../../../redux/slices/booksSlice';
+import { setError } from '../../../redux/slices/errorSlice';
 import createBooksWithId from '../../../utils/createBooksWithId';
 import './BookForm.css';
 
@@ -14,6 +15,8 @@ function BookForm() {
     e.preventDefault();
     if (title && author) {
       dispatch(setAddBook(createBooksWithId({ title, author, date })));
+    } else {
+      dispatch(setError('Заповніть "Назву книги" та "Автора"'));
     }
     setTitle('');
     setAuthor('');

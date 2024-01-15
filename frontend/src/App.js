@@ -5,6 +5,7 @@ import BooksLabrary from './components/BooksLabrary/BooksLabrary';
 import ToDoList from './components/ToDoList/ToDoList';
 import Home from './components/Home/Home';
 import NotFound from './components/NotFound/NotFound';
+import Error from './components/Error/Error';
 
 function App() {
   return (
@@ -17,7 +18,7 @@ function App() {
         </Route>
         <Route path="*" element={<NotFound />} />
       </Routes>
-      ;
+      <Error />
     </BrowserRouter>
   );
 }
