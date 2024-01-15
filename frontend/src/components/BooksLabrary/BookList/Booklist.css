@@ -44,6 +44,8 @@
 .book-list .book-info {
   flex: 1;
   text-align: left;
+  font-size: 18px;
+  font-family: Georgia, 'Times New Roman', Times, serif;
 }
 
 .book-list .book-actions {
