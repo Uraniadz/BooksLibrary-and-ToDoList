@@ -1,15 +1,27 @@
 import { useState } from 'react';
 import { useDispatch } from 'react-redux';
-import { setAddBook } from '../../../redux/slices/booksSlice';
+import { setAddBook, setRandomBook } from '../../../redux/slices/booksSlice';
 import { setError } from '../../../redux/slices/errorSlice';
 import createBooksWithId from '../../../utils/createBooksWithId';
 import './BookForm.css';
+import books from '../../../data/books.json';
+import { fetchBooks } from '../../../redux/slices/booksSlice';
 
 function BookForm() {
   const [title, setTitle] = useState('');
   const [author, setAuthor] = useState('');
   const [date, setDate] = useState('');
   const dispatch = useDispatch();
+
+  const handleBookViaAPI = () => {
+    dispatch(fetchBooks('http://localhost:5000/books-api'));
+  };
+
+  const handleRandomBook = () => {
+    const indexBook = Math.floor(Math.random() * books.length);
+    const randomBook = books[indexBook];
+    dispatch(setRandomBook(createBooksWithId(randomBook)));
+  };
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -54,6 +66,12 @@ function BookForm() {
           </div>
 
           <button type="submit">Додати книгу</button>
+          <button onClick={handleRandomBook} type="button">
+            Випадкова книга
+          </button>
+          <button onClick={handleBookViaAPI} type="button">
+            Книга онлайн
+          </button>
         </form>
       </div>
     </>

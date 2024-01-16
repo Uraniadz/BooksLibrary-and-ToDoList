@@ -7,9 +7,6 @@ function BooksLabrary() {
   return (
     <>
       <div className={styles['app']}>
-        {/* <div className={styles['app-header']}>
-          <h1>Моя улюблена бібліотека книг</h1>
-        </div> */}
         <div className={styles['app-main']}>
           <div className={styles['app-left-column']}>
             <BookForm />
