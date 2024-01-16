@@ -8,7 +8,7 @@ const fetchBooks = createAsyncThunk(
   async (url, thunkApi) => {
     try {
       const res = await axios.get(url);
-      return res.data;
+      return createBooksWithId(res.data, 'ViaApi');
     } catch (error) {
       thunkApi.dispatch(
         setError(`Problem this network ${error.name} : ${error.message}`)
@@ -34,7 +34,7 @@ const booksSlice = createSlice({
   extraReducers: (builder) => {
     builder.addCase(fetchBooks.fulfilled, (state, action) => {
       if (action?.payload?.title && action?.payload?.author) {
-        return [...state, createBooksWithId(action.payload)];
+        return [...state, action.payload];
       }
     });
   },

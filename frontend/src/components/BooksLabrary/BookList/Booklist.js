@@ -22,7 +22,9 @@ function BookList() {
                   </i>
                   {book.author}
                 </strong>{' '}
-                {book.date}
+                {book.date} {'('}
+                {book.source}
+                {')'}
               </div>
             </li>
           ))}

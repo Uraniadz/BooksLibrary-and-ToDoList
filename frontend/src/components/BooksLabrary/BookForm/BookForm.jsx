@@ -20,13 +20,15 @@ function BookForm() {
   const handleRandomBook = () => {
     const indexBook = Math.floor(Math.random() * books.length);
     const randomBook = books[indexBook];
-    dispatch(setRandomBook(createBooksWithId(randomBook)));
+    dispatch(setRandomBook(createBooksWithId(randomBook, 'Random')));
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
     if (title && author) {
-      dispatch(setAddBook(createBooksWithId({ title, author, date })));
+      dispatch(
+        setAddBook(createBooksWithId({ title, author, date }, 'Manual'))
+      );
     } else {
       dispatch(setError('Заповніть "Назву книги" та "Автора"'));
     }
