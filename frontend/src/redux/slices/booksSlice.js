@@ -30,6 +30,21 @@ const booksSlice = createSlice({
     setRandomBook: (state, action) => {
       state.push(action.payload);
     },
+    setDeleteBook: (state, action) => {
+      return state.filter((book) => book.id !== action.payload);
+    },
+    setToggleIsFavorite: (state, action) => {
+      return state.map((book) => {
+        if (book.id === action.payload) {
+          return { ...book, isFavorite: !book.isFavorite };
+        } else {
+          return book;
+        }
+      });
+    },
+    setClearAllBooks: () => {
+      return initialState;
+    },
   },
   extraReducers: (builder) => {
     builder.addCase(fetchBooks.fulfilled, (state, action) => {
@@ -40,6 +55,12 @@ const booksSlice = createSlice({
   },
 });
 
-export const { setAddBook, setRandomBook } = booksSlice.actions;
+export const {
+  setAddBook,
+  setRandomBook,
+  setDeleteBook,
+  setToggleIsFavorite,
+  setClearAllBooks,
+} = booksSlice.actions;
 export { fetchBooks };
 export default booksSlice.reducer;
