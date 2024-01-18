@@ -10,7 +10,7 @@ import {
 import './Booklist.css';
 
 function BookList() {
-  const books = useSelector((state) => state.books);
+  const books = useSelector((state) => state.books.books);
   const dispatch = useDispatch();
 
   const handleClearAllBooks = () => {

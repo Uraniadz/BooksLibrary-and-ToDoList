@@ -1,5 +1,6 @@
 import { useState } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import { BiLoaderCircle } from 'react-icons/bi';
 import { setAddBook, setRandomBook } from '../../../redux/slices/booksSlice';
 import { setError } from '../../../redux/slices/errorSlice';
 import createBooksWithId from '../../../utils/createBooksWithId';
@@ -11,6 +12,8 @@ function BookForm() {
   const [title, setTitle] = useState('');
   const [author, setAuthor] = useState('');
   const [date, setDate] = useState('');
+  const isLoading = useSelector((state) => state.books.isLoadingViaApi);
+
   const dispatch = useDispatch();
 
   const handleBookViaAPI = () => {
@@ -71,8 +74,14 @@ function BookForm() {
           <button onClick={handleRandomBook} type="button">
             Випадкова книга
           </button>
-          <button onClick={handleBookViaAPI} type="button">
-            Книга онлайн
+          <button onClick={handleBookViaAPI} type="button" disabled={isLoading}>
+            {isLoading ? (
+              <div>
+                Йде загрузка... <BiLoaderCircle className="spinner" />
+              </div>
+            ) : (
+              <div> Книга онлайн</div>
+            )}
           </button>
         </form>
       </div>

@@ -18,29 +18,36 @@ const fetchBooks = createAsyncThunk(
   }
 );
 
-const initialState = [];
+const initialState = {
+  books: [],
+  isLoadingViaApi: false,
+};
 
 const booksSlice = createSlice({
   name: 'books',
   initialState,
   reducers: {
     setAddBook: (state, action) => {
-      return [...state, action.payload];
+      state.books.push(action.payload);
     },
     setRandomBook: (state, action) => {
-      state.push(action.payload);
+      state.books.push(action.payload);
     },
     setDeleteBook: (state, action) => {
-      return state.filter((book) => book.id !== action.payload);
+      return {
+        ...state,
+        books: state.books.filter((book) => book.id !== action.payload),
+      };
     },
     setToggleIsFavorite: (state, action) => {
-      return state.map((book) => {
-        if (book.id === action.payload) {
-          return { ...book, isFavorite: !book.isFavorite };
-        } else {
-          return book;
-        }
-      });
+      return {
+        ...state,
+        books: state.books.map((book) =>
+          book.id === action.payload
+            ? { ...book, isFavorite: !book.isFavorite }
+            : { ...book }
+        ),
+      };
     },
     setClearAllBooks: () => {
       return initialState;
@@ -49,8 +56,15 @@ const booksSlice = createSlice({
   extraReducers: (builder) => {
     builder.addCase(fetchBooks.fulfilled, (state, action) => {
       if (action?.payload?.title && action?.payload?.author) {
-        return [...state, action.payload];
+        state.books.push(action.payload);
+        state.isLoadingViaApi = false;
       }
+    });
+    builder.addCase(fetchBooks.pending, (state) => {
+      state.isLoadingViaApi = true;
+    });
+    builder.addCase(fetchBooks.rejected, (state) => {
+      state.isLoadingViaApi = false;
     });
   },
 });
@@ -61,6 +75,7 @@ export const {
   setDeleteBook,
   setToggleIsFavorite,
   setClearAllBooks,
+  setIsLoadingViaApi,
 } = booksSlice.actions;
 export { fetchBooks };
 export default booksSlice.reducer;

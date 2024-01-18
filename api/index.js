@@ -8,9 +8,11 @@ app.use(cors());
 
 const port = process.env.PORT || 5000;
 app.get('/books-api', (req, res) => {
-  const indexBook = Math.floor(Math.random() * books.length);
-  const bookApi = books[indexBook];
-  res.json(bookApi);
+  setTimeout(() => {
+    const indexBook = Math.floor(Math.random() * books.length);
+    const bookApi = books[indexBook];
+    res.json(bookApi);
+  }, 5000);
 });
 app.listen(port, () => {
   console.log(`Server is running on port ${port}`);

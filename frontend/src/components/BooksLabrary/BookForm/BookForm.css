@@ -33,6 +33,7 @@
 }
 
 .book-form .spinner {
+  scale: 1.3;
   animation: spinner 1s infinite linear;
   margin-left: 10px;
 }
