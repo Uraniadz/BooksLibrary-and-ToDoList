@@ -12,34 +12,35 @@ import './Booklist.css';
 function BookList() {
   const books = useSelector((state) => state.books.books);
   const filterTitle = useSelector((state) => state.filter.title);
-
   const dispatch = useDispatch();
 
   const filterBooks = books.filter((book) => {
     const bookTitle = book.title
       .toLowerCase()
       .includes(filterTitle.toLowerCase());
+    const bookAuthor = [];
     return bookTitle;
   });
+
   const highlighFilter = (text, filter) => {
     if (!filter) {
       return text;
-    } else {
-      const regFilter = new RegExp(`(${filter})`, 'gi');
-
-      return text.split(regFilter).map((substring, i) => {
-        if (substring.toLowerCase() === filter.toLowerCase()) {
-          return (
-            <span key={i} className="highlight">
-              {substring}
-            </span>
-          );
-        } else {
-          return substring;
-        }
-      });
     }
+    const regExt = new RegExp(`(${filter})`, 'gi');
+
+    return text.split(regExt).map((subsrting, i) => {
+      if (subsrting.toLowerCase() === filter.toLowerCase()) {
+        return (
+          <span className="highlight" key={i}>
+            {subsrting}
+          </span>
+        );
+      } else {
+        return subsrting;
+      }
+    });
   };
+
   const handleClearAllBooks = () => {
     dispatch(setClearAllBooks());
   };
@@ -67,7 +68,8 @@ function BookList() {
           {filterBooks.map((book, i) => (
             <li key={book.id}>
               <div className="book-info">
-                {++i}. {'"'} {highlighFilter(book.title, filterTitle)}
+                {++i}. {'"'}
+                {highlighFilter(book.title, filterTitle)}
                 {'"'}
                 <strong>
                   <i>
