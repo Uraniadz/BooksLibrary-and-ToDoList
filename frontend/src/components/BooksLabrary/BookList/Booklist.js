@@ -12,14 +12,22 @@ import './Booklist.css';
 function BookList() {
   const books = useSelector((state) => state.books.books);
   const filterTitle = useSelector((state) => state.filter.title);
+  const filterAuthor = useSelector((state) => state.filter.author);
+  const filterOnlyFavorite = useSelector((state) => state.filter.onlyFavorite);
+  console.log(filterOnlyFavorite);
+
   const dispatch = useDispatch();
 
   const filterBooks = books.filter((book) => {
     const bookTitle = book.title
       .toLowerCase()
       .includes(filterTitle.toLowerCase());
-    const bookAuthor = [];
-    return bookTitle;
+
+    const bookAuthor = book.author
+      .toLowerCase()
+      .includes(filterAuthor.toLowerCase());
+
+    return bookTitle && bookAuthor;
   });
 
   const highlighFilter = (text, filter) => {
@@ -76,7 +84,7 @@ function BookList() {
                     {' '}
                     <span className="">написана:</span>{' '}
                   </i>
-                  {book.author}
+                  {highlighFilter(book.author, filterAuthor)}
                 </strong>{' '}
                 {book.date} {'('}
                 {book.source}

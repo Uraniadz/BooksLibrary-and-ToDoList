@@ -1,10 +1,24 @@
 import { useSelector, useDispatch } from 'react-redux';
-import { setAddWords } from '../../../redux/slices/filterSlice';
+import {
+  setAddWords,
+  setAddAuthor,
+  setOnlyFavorite,
+} from '../../../redux/slices/filterSlice';
 import './Filter.css';
 function Filter() {
-  const filter = useSelector((state) => state.filter.title);
+  const filterTitle = useSelector((state) => state.filter.title);
+  const filterAuthor = useSelector((state) => state.filter.author);
+  const filterOnlyFavorite = useSelector((state) => state.filter.onlyFavorite);
 
   const dispatch = useDispatch();
+
+  const handleChangeOnlyFavoriteBooks = (e) => {
+    dispatch(setOnlyFavorite(e.target.value));
+  };
+  const handleAddAuthor = (e) => {
+    dispatch(setAddAuthor(e.target.value));
+  };
+
   const handleAddWords = (e) => {
     dispatch(setAddWords(e.target.value));
   };
@@ -14,18 +28,27 @@ function Filter() {
       <div className="filter-row">
         <div className="filter-group">
           <input
-            value={filter}
+            value={filterTitle}
             onChange={(e) => handleAddWords(e)}
             type="text"
             placeholder="Фільтер по назві книги..."
           />
         </div>
         <div className="filter-group">
-          <input type="text" placeholder="Фільтер по автору..." />
+          <input
+            value={filterAuthor}
+            onChange={(e) => handleAddAuthor(e)}
+            type="text"
+            placeholder="Фільтер по автору..."
+          />
         </div>
         <div className="filter-group">
           <label>
-            <input type="checkbox" />
+            <input
+              value={filterOnlyFavorite}
+              onChange={(e) => handleChangeOnlyFavoriteBooks(e)}
+              type="checkbox"
+            />
             Тільки вибрані книги
           </label>
         </div>
