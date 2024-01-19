@@ -3,8 +3,10 @@ import {
   setAddWords,
   setAddAuthor,
   setOnlyFavorite,
+  setClearAllFilters,
 } from '../../../redux/slices/filterSlice';
 import './Filter.css';
+
 function Filter() {
   const filterTitle = useSelector((state) => state.filter.title);
   const filterAuthor = useSelector((state) => state.filter.author);
@@ -12,6 +14,9 @@ function Filter() {
 
   const dispatch = useDispatch();
 
+  const handleClearAllFilters = () => {
+    dispatch(setClearAllFilters());
+  };
   const handleChangeOnlyFavoriteBooks = (e) => {
     dispatch(setOnlyFavorite(e.target.value));
   };
@@ -52,7 +57,9 @@ function Filter() {
             Тільки вибрані книги
           </label>
         </div>
-        <button type="button">Скинути фільтри</button>
+        <button type="button" onClick={handleClearAllFilters}>
+          Скинути фільтри
+        </button>
       </div>
     </div>
   );

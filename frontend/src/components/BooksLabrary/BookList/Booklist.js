@@ -14,7 +14,6 @@ function BookList() {
   const filterTitle = useSelector((state) => state.filter.title);
   const filterAuthor = useSelector((state) => state.filter.author);
   const filterOnlyFavorite = useSelector((state) => state.filter.onlyFavorite);
-  console.log(filterOnlyFavorite);
 
   const dispatch = useDispatch();
 
@@ -27,7 +26,9 @@ function BookList() {
       .toLowerCase()
       .includes(filterAuthor.toLowerCase());
 
-    return bookTitle && bookAuthor;
+    const bookOnlyFavorite = filterOnlyFavorite ? book.isFavorite : true;
+
+    return bookTitle && bookAuthor && bookOnlyFavorite;
   });
 
   const highlighFilter = (text, filter) => {

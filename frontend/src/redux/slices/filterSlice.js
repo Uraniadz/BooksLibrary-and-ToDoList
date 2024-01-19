@@ -18,8 +18,15 @@ const filterSlice = createSlice({
     setOnlyFavorite: (state) => {
       return { ...state, onlyFavorite: !state.onlyFavorite };
     },
+    setClearAllFilters: () => {
+      return initialState;
+    },
   },
 });
-export const { setAddWords, setAddAuthor, setOnlyFavorite } =
-  filterSlice.actions;
+export const {
+  setAddWords,
+  setAddAuthor,
+  setOnlyFavorite,
+  setClearAllFilters,
+} = filterSlice.actions;
 export default filterSlice.reducer;
