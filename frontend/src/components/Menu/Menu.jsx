@@ -12,12 +12,12 @@ function Menu() {
         >
           Бібліотека книг
         </NavLink>
-        <NavLink
+        {/* <NavLink
           className={({ isActive }) => (isActive ? 'myactive-green' : '')}
           to="todolist"
         >
           Список справ
-        </NavLink>
+        </NavLink> */}
       </nav>
     </>
   );
