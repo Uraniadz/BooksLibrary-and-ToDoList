@@ -17,8 +17,8 @@ function Filter() {
   const handleClearAllFilters = () => {
     dispatch(setClearAllFilters());
   };
-  const handleChangeOnlyFavoriteBooks = (e) => {
-    dispatch(setOnlyFavorite(e.target.value));
+  const handleChangeOnlyFavoriteBooks = () => {
+    dispatch(setOnlyFavorite());
   };
   const handleAddAuthor = (e) => {
     dispatch(setAddAuthor(e.target.value));
@@ -50,8 +50,8 @@ function Filter() {
         <div className="filter-group">
           <label>
             <input
-              value={filterOnlyFavorite}
-              onChange={(e) => handleChangeOnlyFavoriteBooks(e)}
+              checked={filterOnlyFavorite}
+              onChange={handleChangeOnlyFavoriteBooks}
               type="checkbox"
             />
             Тільки вибрані книги

@@ -1,4 +1,4 @@
-# myProject with My books library and my to do list
+# myProject with My books library
 
 ## Available Scripts
 
